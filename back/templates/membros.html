@@ -1,0 +1,56 @@
+{% extends "decorator.html" %}
+{% block body %}
+
+<div class="panel-body">
+	<a type="button" href="{% url 'membros_cadastrar' %}" class="btn btn-primary pull-right">Cadastrar</a>
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">Membros Cadastrados</h3>
+	</div>
+	<div class="panel-body">
+		<table class="table"> <thead>
+			<tr>
+				<th scope="col">Nome</th>
+				<th scope="col">Editar</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for membro in membros %}
+			<tr>
+				<td>{{ membro.nome}}</td>
+				<td>
+					<a class="btn btn-warning" href="{% url 'membros_editar' membro.id %}">
+						<span class="glyphicon glyphicon-pencil"></span> Editar
+					</a>
+					<a class="btn btn-danger" data-toggle="modal" data-target="#{{membro.id}}">
+						<span class="glyphicon glyphicon-remove"></span> Excluir
+					</a>
+
+					<div class="modal fade" id="{{membro.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" >Alerta de Confirmação</h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body">
+					        Tem certeza que deseja excluir o {{membro.nome}}?
+					      </div>
+					      <div class="modal-footer">
+					      	<a type="button" href="{% url 'membros_remover' membro.id %}" class="btn btn-success">Sim</a>
+					        <button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody></table>
+	</div>
+</div>
+{% endblock %}
