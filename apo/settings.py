@@ -5,7 +5,7 @@ from dj_database_url import parse as dburl
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-#SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY='_cvub76v=-wh85kj9l1^!t8x8ab(2006_s-==v6@@1q_pk=umi' 
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['*', 'localhost']
