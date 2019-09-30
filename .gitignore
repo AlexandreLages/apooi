@@ -2,3 +2,6 @@
 .vEnv
 .env
 *pyc
+media/*
+*.sqlite3
+staticfiles/*
