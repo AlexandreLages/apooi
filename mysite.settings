@@ -1,2 +1,3 @@
 ALLOWED_HOSTS = ['*']
 DEBUG = False
+SECRET_KEY=_cvub76v=-wh85kj9l1^!t8x8ab(2006_s-==v6@@1q_pk=umi
