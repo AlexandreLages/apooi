@@ -5,10 +5,10 @@ from dj_database_url import parse as dburl
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = config('SECRET_KEY')
+#SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['academia-piauiense-heroku.herokuapp.com', 'localhost']
+ALLOWED_HOSTS = ['*', 'localhost']
 
 
 INSTALLED_APPS = [
