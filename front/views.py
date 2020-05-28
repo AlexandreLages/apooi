@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from core.models import Estatuto, Sobre, Noticia, Curso, Diretoria, Home, CadeiraFundadoresTitulares
+from core.models import Estatuto, Sobre, Noticia, Curso, Diretoria, Home, CadeiraFundadoresTitulares, Cadeira
 
 
 def index(request):
@@ -30,8 +30,10 @@ def index(request):
 
 
 def estatuto(request):
-	estatuto = Estatuto.objects.get(id=1)
-	return render(request, 'front_estatuto.html', {'estatuto': estatuto })
+	estatuto = Estatuto.objects.filter(id=1)
+	if estatuto:
+		return render(request, 'front_estatuto.html', {'estatuto': estatuto[0]})
+	return render(request, 'front_estatuto.html')
 
 
 def diretorias(request):
@@ -65,4 +67,5 @@ def detalha_curso(request, id_curso):
 
 def lista_cadeiras_fundadores(request):
 	cadeiras_fundadores = CadeiraFundadoresTitulares.objects.all()
-	return render(request, 'front_lista_cadeiras_fundadores.html', {'cadeiras': cadeiras_fundadores})
+	cadeiras = Cadeira.objects.all()
+	return render(request, 'front_lista_cadeiras_fundadores.html', {'cadeiras': cadeiras_fundadores, 'cadeiras_membros': cadeiras})

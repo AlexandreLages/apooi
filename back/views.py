@@ -307,25 +307,30 @@ def cadeira_fundadores(request):
 def cadeira_fundadores_cadastrar(request):
 	if request.method == 'POST':
 		imagem = request.FILES.get('imagem', False)
+		imagem_fundador = request.FILES.get('imagem_fundador', False)
 		in_memorian = request.POST.get('in_memorian', '') == 'on'
+		uploaded_file_membro_url = None
+		uploaded_file_fundador_url = None
+
 		if imagem:
 			fs = FileSystemStorage()
 			filename = fs.save(imagem.name, imagem)
-			uploaded_file_url = fs.url(filename)
-			cadeira_fundadores = CadeiraFundadoresTitulares(
+			uploaded_file_membro_url = fs.url(filename)
+		if imagem_fundador:
+			fs = FileSystemStorage()
+			filename = fs.save(imagem_fundador.name, imagem_fundador)
+			uploaded_file_fundador_url = fs.url(filename)
+
+		cadeira_fundadores = CadeiraFundadoresTitulares(
 				nome_fundador_titular=request.POST['nome_fundador_titular'],
 				nome_membro_atual=request.POST['nome_membro_atual'],
 				descricao_fundador_titular=request.POST['descricao_fundador_titular'],
 				descricao_membro_atual=request.POST['descricao_membro_atual'],
-				imagem_membro_atual=uploaded_file_url,
-				in_memorian=in_memorian)
-		else:
-			cadeira_fundadores = CadeiraFundadoresTitulares(
-				nome_fundador_titular=request.POST['nome_fundador_titular'],
-				nome_membro_atual=request.POST['nome_membro_atual'],
-				descricao_fundador_titular=request.POST['descricao_fundador_titular'],
-				descricao_membro_atual=request.POST['descricao_membro_atual'],
-				in_memorian=in_memorian)
+				imagem_membro_atual=uploaded_file_membro_url,
+				imagem_membro_fundador=uploaded_file_fundador_url,
+				in_memorian=in_memorian,
+				numero_da_cadeira=request.POST['numero_da_cadeira'])
+		
 		cadeira_fundadores.save()
 		return redirect('cadeira_fundadores')
 	else:

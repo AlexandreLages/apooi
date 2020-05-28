@@ -56,4 +56,6 @@ class CadeiraFundadoresTitulares(models.Model):
 	descricao_fundador_titular = models.CharField(max_length=250)
 	descricao_membro_atual = models.CharField(max_length=250)
 	imagem_membro_atual = models.ImageField(upload_to='imagens/', blank=True, null=True)
+	imagem_membro_fundador = models.ImageField(upload_to='imagens/', blank=True, null=True)
 	in_memorian = models.BooleanField(default=False)
+	numero_da_cadeira = models.IntegerField(null=True)

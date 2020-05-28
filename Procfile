@@ -1,1 +1,0 @@
-web: gunicorn apo.wsgi --log-file -
